@@ -1,0 +1,92 @@
+.table {
+  --bs-table-color: #000;
+  --bs-table-bg: rgba(0, 0, 0, 0);
+  --bs-table-border-color: #005288;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: var(--bs-body-color);
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+  --bs-table-active-color: var(--bs-body-color);
+  --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-table-hover-color: var(--bs-body-color);
+  --bs-table-hover-bg: #444;
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--bs-table-color);
+  vertical-align: top;
+}
+.table > thead {
+  vertical-align: bottom;
+  border-radius: 20px;
+  padding: 31px;
+  color: white;
+  background: #005288;
+}
+.table > tbody {
+  vertical-align: inherit;
+  --bs-table-bg: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+@media (min-width: 992px) {
+  .col-lg-6 {
+    display: flex;
+    flex: 0 0 auto;
+    width: 50%;
+    flex: 1;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-lg-6 {
+    display: flex;
+    flex: 0 0 auto;
+    width: 50%;
+    flex: 1;
+    justify-content: flex-end;
+  }
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+  font-size: var(--bs-pagination-font-size);
+  color: #005288;
+  text-decoration: none;
+  background-color: var(--bs-pagination-bg);
+  border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: 20px;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.page-link.active, .active > .page-link {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: #005288;
+    border-color: #005288;
+}
+
+.btn {
+    --bs-btn-border-radius: 20px;
+}
+
+.btn-secondary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #005288;
+    --bs-btn-border-color: #005f9e;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #005f9e;
+    --bs-btn-hover-border-color: #005f9e;
+}

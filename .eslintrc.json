@@ -25,8 +25,8 @@
     "arrow-body-style": ["error", "always"],
     "no-unused-vars": "warn",
     "import/extensions": "off",
-    "react-hooks/exhaustive-deps": "error",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "warn",
     "prettier/prettier": [
       "error",
       {
