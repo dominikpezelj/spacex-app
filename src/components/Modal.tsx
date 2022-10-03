@@ -22,7 +22,7 @@ export const ShipModal = ({ missions, show, setIsModalOpen }: ShipModalProps) =>
         <Modal.Title>Missions</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ListGroup as='div'>
+        <ListGroup as='ul'>
           <ListGroup.Item
             as='li'
             style={{
@@ -40,7 +40,7 @@ export const ShipModal = ({ missions, show, setIsModalOpen }: ShipModalProps) =>
         </ListGroup>
         {missions.map((item) => {
           return (
-            <ListGroup as='ul' key={item.flight + 1000}>
+            <ListGroup as='ul' key={item.flight}>
               <ListGroup.Item
                 as='li'
                 style={{
@@ -49,8 +49,8 @@ export const ShipModal = ({ missions, show, setIsModalOpen }: ShipModalProps) =>
                   padding: '1rem 2rem',
                 }}
               >
-                <div>{item.name}</div>
-                <div>{item.flight}</div>
+                <i>{item.name}</i>
+                <i>{item.flight}</i>
               </ListGroup.Item>
             </ListGroup>
           )
