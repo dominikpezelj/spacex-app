@@ -1,5 +1,6 @@
 import { Stack } from 'react-bootstrap'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const HeaderStyled = styled.div`
   position: relative;
@@ -21,12 +22,20 @@ const HeaderContent = styled.div`
 `
 
 export const Header = () => {
+  const missionName = useSelector((state: any) => {
+    return state.header.headerMissionName
+  })
+  const missionPatch = useSelector((state: any) => {
+    return state.header.headerPatch
+  })
+
+  console.log(missionPatch)
   return (
     <HeaderStyled>
       <HeaderContent>
         <Stack direction='horizontal' gap={3}>
-          <img src='https://images2.imgbox.com/33/1a/ujrnfkna_o.png' width={200} />
-          <div>Falcon Heavy Test Flight</div>
+          <img src={missionPatch} width={200} />
+          <div>{missionName}</div>
         </Stack>
       </HeaderContent>
     </HeaderStyled>
