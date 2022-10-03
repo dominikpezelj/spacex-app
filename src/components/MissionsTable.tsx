@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 9rem;
 `
 
 export const MissionsTable = () => {
@@ -43,7 +43,7 @@ export const MissionsTable = () => {
         keyField='id'
         data={missionsList}
         columns={columns}
-        pagination={paginationFactory({ sizePerPage: 5 })}
+        pagination={paginationFactory({ sizePerPage: 10 })}
         rowEvents={rowEvents}
         noDataIndication={<LoadingSpinner />}
       />

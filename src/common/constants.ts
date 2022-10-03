@@ -30,8 +30,7 @@ export const columns = [
     sort: true,
   },
   {
-    dataField: 'launchSuccess',
-    text: 'Launch sucess',
-    sort: true,
+    dataField: 'launchStatus',
+    text: 'Launch status',
   },
 ]

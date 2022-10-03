@@ -14,6 +14,11 @@
   color: var(--bs-table-color);
   vertical-align: top;
 }
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  } 
 .table > thead {
   vertical-align: bottom;
   border-radius: 20px;

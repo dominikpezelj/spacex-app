@@ -1,4 +1,4 @@
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { useEffect, useRef, useState } from 'react'
 
 import { Link } from 'react-router-dom'
@@ -25,20 +25,20 @@ const ParallaxTextSm = styled.div`
 `
 
 export const Paralax = () => {
-  const endOfPageRef = useRef<null | HTMLDivElement>(null)
+  const endOfPageRef = useRef<IParallax | null>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     console.log(endOfPageRef.current)
-    if (endOfPageRef.current) {
+    if (endOfPageRef.current !== undefined && endOfPageRef.current) {
       console.log(endOfPageRef.current)
-      endOfPageRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      endOfPageRef.current.scrollTo(3)
     }
     setIsLoaded(true)
   }, [isLoaded])
 
   return (
-    <div ref={endOfPageRef}>
-      <Parallax pages={4} innerStyle={{ background: 'black' }}>
+    <div>
+      <Parallax pages={4} innerStyle={{ background: 'black' }} ref={endOfPageRef}>
         <ParallaxLayer
           offset={0}
           speed={1}
