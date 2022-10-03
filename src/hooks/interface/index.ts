@@ -74,3 +74,8 @@ export interface CardItem {
   text: string
   value: string | boolean | number | undefined
 }
+
+export interface Mission {
+  flight: string
+  name: string
+}

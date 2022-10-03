@@ -1,9 +1,12 @@
 import { CardItem, MissionDetails } from './interface'
 import { useEffect, useState } from 'react'
 
+import moment from 'moment'
+
 export const usePrepareData = (missionDetailsList: MissionDetails) => {
   const [launchDetailsList, setLaunchDetailsList] = useState<CardItem[]>([])
   const [rocketDetailsList, setRocketDetailsList] = useState<CardItem[]>([])
+
   useEffect(() => {
     if (missionDetailsList) {
       const {
@@ -33,7 +36,7 @@ export const usePrepareData = (missionDetailsList: MissionDetails) => {
         },
         {
           text: 'Launch date',
-          value: launchDate,
+          value: moment(launchDate).format('MMMM-DD-YYYY h:mm'),
         },
       ]
 

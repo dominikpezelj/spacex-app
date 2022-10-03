@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
+import { Button } from 'react-bootstrap'
 import { ImageCarousel } from './Carousel'
 import { LoadingSpinner } from './LoadingSpinner'
 import ReactPlayer from 'react-player'
-import Stack from 'react-bootstrap/Stack'
+import { ShipModal } from './Modal'
 import styled from 'styled-components'
 import { useGetMissionById } from '../hooks/useGetMissionById'
 import { usePrepareData } from '../hooks/usePrepareData'
@@ -12,15 +13,26 @@ const CardBg = styled.div`
   background: #005288;
   padding: 2rem;
   border-radius: 20px;
+  justifyContent: 'space-between',
+  display: 'flex',
+  flexDirection: 'row',
 `
 
 const Card = styled.div`
   background: #dfddda;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
   flex: 1;
   border-radius: 20px;
+`
+
+const CardContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `
 
 const CardHeader = styled.div`
@@ -46,6 +58,10 @@ const CardItem = styled.div`
   justify-content: space-between;
   padding: 0.5rem;
   border-bottom: 3px solid #005288;
+  align-items: center;
+  @media (max-width: 600px) {
+    display: block;
+  }
 `
 const CardItemTitle = styled.div`
   font-weight: 600;
@@ -59,6 +75,28 @@ const CardItemValue = styled.div`
   border-radius: 10px;
   color: white;
 `
+const Alert = styled.div`
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #005288;
+  border-radius: 1rem;
+  color: white;
+  padding: 0.5rem 0 0.5rem 0;
+`
+
+const ItemTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+
+  text-transform: uppercase;
+  font-weight: 400;
+  border-bottom: 3px solid #005288;
+`
 type MissionsDetailsProps = {
   missionId: string
 }
@@ -67,6 +105,7 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
   const { missionDetailsList } = useGetMissionById(missionId)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const { launchDetailsList, rocketDetailsList } = usePrepareData(missionDetailsList!)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
     if (missionDetailsList) {
@@ -83,160 +122,176 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
           <CardHeader>Mission details</CardHeader>
           <CardBody>
             <CardText>{isLoading ? <LoadingSpinner /> : missionDetailsList?.details}</CardText>
-          </CardBody>
-        </Card>
-      </CardBg>
-
-      <CardBg
-        style={{
-          justifyContent: 'space-between',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '2rem',
-        }}
-      >
-        <Card style={{ maxWidth: '50%' }}>
-          <CardHeader>Launching video</CardHeader>
-          <CardBody>
-            {isLoading ? (
-              <LoadingSpinner />
-            ) : (
-              <ReactPlayer
-                url={missionDetailsList?.links.video_link}
-                controls={true}
-                width={'flex: 1'}
-              />
-            )}
-          </CardBody>
-        </Card>
-        <Card>
-          <CardHeader>Launch details</CardHeader>
-          <CardBody>
-            {isLoading ? (
-              <LoadingSpinner />
-            ) : (
-              launchDetailsList.map((item) => {
-                return (
-                  <CardItem key={item.text}>
-                    <CardItemTitle>{item.text}</CardItemTitle>
-                    <CardItemValue>{item.value}</CardItemValue>
-                  </CardItem>
-                )
-              })
-            )}
-          </CardBody>
-        </Card>
-      </CardBg>
-
-      <CardBg
-        style={{
-          justifyContent: 'space-between',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '2rem',
-        }}
-      >
-        <Card style={{ maxWidth: '50%' }}>
-          <CardHeader>Rocket description</CardHeader>
-          <CardBody
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}
-          >
-            <CardText>
-              {isLoading ? <LoadingSpinner /> : missionDetailsList?.rocket.rocket.description}
-            </CardText>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardHeader>Rocket details</CardHeader>
-          <CardBody>
-            {isLoading ? (
-              <LoadingSpinner />
-            ) : (
-              rocketDetailsList.map((item) => {
-                return (
-                  <CardItem key={item.text}>
-                    <CardItemTitle>{item.text}</CardItemTitle>
-                    <CardItemValue>{item.value}</CardItemValue>
-                  </CardItem>
-                )
-              })
+            {!missionDetailsList?.details && (
+              <Alert>
+                <div>There is no provided details about this mission.</div>
+              </Alert>
             )}
           </CardBody>
         </Card>
       </CardBg>
 
       <CardBg>
+        <CardContent>
+          <Card>
+            <CardHeader>Launching video</CardHeader>
+            <CardBody>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <ReactPlayer
+                  url={missionDetailsList?.links.video_link}
+                  controls={true}
+                  width={'flex: 1'}
+                />
+              )}
+              {!missionDetailsList?.links.video_link && (
+                <Alert>
+                  <div>There is no provided video about this mission.</div>
+                </Alert>
+              )}
+            </CardBody>
+          </Card>
+          <Card>
+            <CardHeader>Launch details</CardHeader>
+            <CardBody>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                launchDetailsList.map((item) => {
+                  return (
+                    <CardItem key={item.text}>
+                      <CardItemTitle>{item.text}</CardItemTitle>
+                      <CardItemValue>{item.value}</CardItemValue>
+                    </CardItem>
+                  )
+                })
+              )}
+            </CardBody>
+          </Card>
+        </CardContent>
+      </CardBg>
+
+      <CardBg>
+        <CardContent>
+          <Card>
+            <CardHeader>Rocket description</CardHeader>
+            <CardBody>
+              <CardText>
+                {isLoading && <LoadingSpinner />}
+                {missionDetailsList?.rocket.rocket.description &&
+                  missionDetailsList?.rocket.rocket.description}
+                {!missionDetailsList?.rocket.rocket.description && (
+                  <Alert>
+                    <div>There is no provided images about this mission.</div>
+                  </Alert>
+                )}
+              </CardText>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardHeader>Rocket details</CardHeader>
+            <CardBody>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                rocketDetailsList.map((item) => {
+                  return (
+                    <CardItem key={item.text}>
+                      <CardItemTitle>{item.text}</CardItemTitle>
+                      <CardItemValue>{item.value}</CardItemValue>
+                    </CardItem>
+                  )
+                })
+              )}
+            </CardBody>
+          </Card>
+        </CardContent>
+      </CardBg>
+
+      <CardBg>
         <Card>
           <CardHeader>Ship details</CardHeader>
-          <CardBody
-            style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <img
-              src='https://i.imgur.com/28dCx6G.jpg'
-              alt='Ship image'
-              width={'45%'}
-              style={{ borderRadius: '5px' }}
-            />
-            <div style={{ width: '50%' }}>
-              <CardItem>
-                <CardItemTitle>Test</CardItemTitle>
-                <CardItemValue>test2</CardItemValue>
-              </CardItem>
-              <CardItem>
-                <CardItemTitle>Test</CardItemTitle>
-                <CardItemValue>test2</CardItemValue>
-              </CardItem>
-              <CardItem>
-                <CardItemTitle>Test</CardItemTitle>
-                <CardItemValue>test2</CardItemValue>
-              </CardItem>
-              <CardItem>
-                <CardItemTitle>Test</CardItemTitle>
-                <CardItemValue>test2</CardItemValue>
-              </CardItem>
-              <CardItem>
-                <CardItemTitle>Test</CardItemTitle>
-                <CardItemValue>test2</CardItemValue>
-              </CardItem>
-            </div>
-          </CardBody>
+          {missionDetailsList?.ships.map((item) => {
+            return (
+              <div key={item.name}>
+                <ItemTitle>
+                  <div>{item.name}</div>{' '}
+                  <Button
+                    variant='primary'
+                    onClick={() => {
+                      return setIsModalOpen(true)
+                    }}
+                  >
+                    Missions
+                  </Button>
+                </ItemTitle>
+                <CardContent style={{ padding: '2rem 1rem 1rem 1rem' }}>
+                  <div style={{ flex: 1 }}>
+                    <img
+                      src={item.image}
+                      alt='Ship image'
+                      width={'100%'}
+                      style={{ borderRadius: '5px' }}
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <CardItem>
+                      <CardItemTitle>Home port</CardItemTitle>
+                      <CardItemValue>{item.home_port}</CardItemValue>
+                    </CardItem>
+                    <CardItem>
+                      <CardItemTitle>Class</CardItemTitle>
+                      <CardItemValue>{item.class}</CardItemValue>
+                    </CardItem>
+                    <CardItem>
+                      <CardItemTitle>Model</CardItemTitle>
+                      <CardItemValue>
+                        {item.model && item.model} {!item.model && '/'}
+                      </CardItemValue>
+                    </CardItem>
+                    <CardItem>
+                      <CardItemTitle>Year built</CardItemTitle>
+                      <CardItemValue>{item.year_built}</CardItemValue>
+                    </CardItem>
+                  </div>
+                </CardContent>
+                <ShipModal
+                  missions={item.missions}
+                  show={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                ></ShipModal>
+              </div>
+            )
+          })}
         </Card>
       </CardBg>
 
       <CardBg>
         <Card>
           <CardHeader>Media content</CardHeader>
-          <CardBody
-            style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            {isLoading ||
-            !missionDetailsList ||
-            missionDetailsList?.links.flickr_images.length === 0 ? (
-              <LoadingSpinner />
-            ) : (
+          <CardContent style={{ padding: '2rem 1rem 1rem 1rem' }}>
+            {isLoading && <LoadingSpinner />}
+            {missionDetailsList && missionDetailsList?.links?.flickr_images.length > 0 && (
               <ImageCarousel images={missionDetailsList.links.flickr_images} />
+            )}
+
+            {missionDetailsList?.links.flickr_images.length === 0 && (
+              <Alert>
+                <div>There is no provided images about this mission.</div>
+              </Alert>
             )}
 
             <div
               style={{
                 display: 'flex',
-                width: '50%',
+                flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
               <div>
-                <Stack direction='horizontal' gap={5} style={{ marginBottom: '2rem' }}>
+                <CardContent style={{ marginBottom: '2rem', alignContent: 'center' }}>
                   {!missionDetailsList?.links.reddit_media ? (
                     ''
                   ) : (
@@ -260,8 +315,8 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
                       <img src='/static/images/logo/news.svg' width={70} />
                     </a>
                   )}
-                </Stack>
-                <Stack direction='horizontal' gap={5}>
+                </CardContent>
+                <CardContent style={{ alignItems: 'center' }}>
                   {!missionDetailsList?.links.presskit ? (
                     ''
                   ) : (
@@ -277,10 +332,10 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
                       <img src='/static/images/logo/wiki.svg' width={100} />
                     </a>
                   )}
-                </Stack>
+                </CardContent>
               </div>
             </div>
-          </CardBody>
+          </CardContent>
         </Card>
       </CardBg>
     </div>
