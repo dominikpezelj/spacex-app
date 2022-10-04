@@ -1,6 +1,5 @@
-import { LogoStyled, LogoText } from './styled/components.styled'
-
 import { Link } from 'react-router-dom'
+import { LogoStyled } from './styled/components.styled'
 import { appName } from '../common/constants'
 
 export const Logo = () => {
@@ -8,7 +7,17 @@ export const Logo = () => {
     <Link to='/' style={{ textDecoration: 'none' }}>
       <LogoStyled>
         <img src='/static/images/rocket.svg' width={30} alt={'Rocket logo'} />
-        <LogoText>{appName}</LogoText>
+        <div
+          style={{
+            fontSize: '25px',
+            fontWeight: 'bold',
+            letterSpacing: '2px',
+            color: 'white',
+            lineHeight: '1rem',
+          }}
+        >
+          {appName}
+        </div>
       </LogoStyled>
     </Link>
   )

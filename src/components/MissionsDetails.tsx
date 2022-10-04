@@ -41,7 +41,15 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
   }, [missionDetailsList])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        paddingTop: '2rem',
+        paddingBottom: '4rem',
+      }}
+    >
       <CardBg>
         <Card>
           <CardHeader>Mission details</CardHeader>
