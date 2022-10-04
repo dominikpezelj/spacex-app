@@ -28,9 +28,7 @@ export const Paralax = () => {
   const endOfPageRef = useRef<IParallax | null>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
-    console.log(endOfPageRef.current)
     if (endOfPageRef.current !== undefined && endOfPageRef.current) {
-      console.log(endOfPageRef.current)
       endOfPageRef.current.scrollTo(3)
     }
     setIsLoaded(true)

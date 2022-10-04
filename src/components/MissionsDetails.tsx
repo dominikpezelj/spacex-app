@@ -1,5 +1,10 @@
+import 'animate.css/animate.min.css'
+import '../common/animate.min.css'
+import '../common/index.css'
+
 import { useEffect, useState } from 'react'
 
+import { AnimationOnScroll } from 'react-animation-on-scroll'
 import { Button } from 'react-bootstrap'
 import { ImageCarousel } from './Carousel'
 import { LoadingSpinner } from './LoadingSpinner'
@@ -91,11 +96,12 @@ const ItemTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.5rem;
-
+  padding: 0.5rem 1rem;
+  background: #005288;
   text-transform: uppercase;
-  font-weight: 400;
-  border-bottom: 3px solid #005288;
+  font-weight: 600;
+  color: white;
+  margin-top: 2rem;
 `
 type MissionsDetailsProps = {
   missionId: string
@@ -120,14 +126,16 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
       <CardBg>
         <Card>
           <CardHeader>Mission details</CardHeader>
-          <CardBody>
-            <CardText>{isLoading ? <LoadingSpinner /> : missionDetailsList?.details}</CardText>
-            {!missionDetailsList?.details && (
-              <Alert>
-                <div>There is no provided details about this mission.</div>
-              </Alert>
-            )}
-          </CardBody>
+          <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+            <CardBody>
+              <CardText>{isLoading ? <LoadingSpinner /> : missionDetailsList?.details}</CardText>
+              {!missionDetailsList?.details && (
+                <Alert>
+                  <div>There is no provided details about this mission.</div>
+                </Alert>
+              )}
+            </CardBody>
+          </AnimationOnScroll>
         </Card>
       </CardBg>
 
@@ -135,39 +143,43 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
         <CardContent>
           <Card>
             <CardHeader>Launching video</CardHeader>
-            <CardBody>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                <ReactPlayer
-                  url={missionDetailsList?.links.video_link}
-                  controls={true}
-                  width={'flex: 1'}
-                />
-              )}
-              {!missionDetailsList?.links.video_link && (
-                <Alert>
-                  <div>There is no provided video about this mission.</div>
-                </Alert>
-              )}
-            </CardBody>
+            <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+              <CardBody>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <ReactPlayer
+                    url={missionDetailsList?.links.video_link}
+                    controls={true}
+                    width={'flex: 1'}
+                  />
+                )}
+                {!missionDetailsList?.links.video_link && (
+                  <Alert>
+                    <div>There is no provided video about this mission.</div>
+                  </Alert>
+                )}
+              </CardBody>
+            </AnimationOnScroll>
           </Card>
           <Card>
             <CardHeader>Launch details</CardHeader>
-            <CardBody>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                launchDetailsList.map((item) => {
-                  return (
-                    <CardItem key={item.text}>
-                      <CardItemTitle>{item.text}</CardItemTitle>
-                      <CardItemValue>{item.value}</CardItemValue>
-                    </CardItem>
-                  )
-                })
-              )}
-            </CardBody>
+            <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+              <CardBody>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  launchDetailsList.map((item) => {
+                    return (
+                      <CardItem key={item.text}>
+                        <CardItemTitle>{item.text}</CardItemTitle>
+                        <CardItemValue>{item.value}</CardItemValue>
+                      </CardItem>
+                    )
+                  })
+                )}
+              </CardBody>
+            </AnimationOnScroll>
           </Card>
         </CardContent>
       </CardBg>
@@ -176,35 +188,39 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
         <CardContent>
           <Card>
             <CardHeader>Rocket description</CardHeader>
-            <CardBody>
-              <CardText>
-                {isLoading && <LoadingSpinner />}
-                {missionDetailsList?.rocket.rocket.description &&
-                  missionDetailsList?.rocket.rocket.description}
-                {!missionDetailsList?.rocket.rocket.description && (
-                  <Alert>
-                    <div>There is no provided images about this mission.</div>
-                  </Alert>
-                )}
-              </CardText>
-            </CardBody>
+            <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+              <CardBody>
+                <CardText>
+                  {isLoading && <LoadingSpinner />}
+                  {missionDetailsList?.rocket.rocket.description &&
+                    missionDetailsList?.rocket.rocket.description}
+                  {!missionDetailsList?.rocket.rocket.description && (
+                    <Alert>
+                      <div>There is no provided images about this mission.</div>
+                    </Alert>
+                  )}
+                </CardText>
+              </CardBody>
+            </AnimationOnScroll>
           </Card>
           <Card>
             <CardHeader>Rocket details</CardHeader>
-            <CardBody>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                rocketDetailsList.map((item) => {
-                  return (
-                    <CardItem key={item.text}>
-                      <CardItemTitle>{item.text}</CardItemTitle>
-                      <CardItemValue>{item.value}</CardItemValue>
-                    </CardItem>
-                  )
-                })
-              )}
-            </CardBody>
+            <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+              <CardBody>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  rocketDetailsList.map((item) => {
+                    return (
+                      <CardItem key={item.text}>
+                        <CardItemTitle>{item.text}</CardItemTitle>
+                        <CardItemValue>{item.value}</CardItemValue>
+                      </CardItem>
+                    )
+                  })
+                )}
+              </CardBody>
+            </AnimationOnScroll>
           </Card>
         </CardContent>
       </CardBg>
@@ -212,58 +228,90 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
       <CardBg>
         <Card>
           <CardHeader>Ship details</CardHeader>
-          {missionDetailsList?.ships.map((item) => {
-            return (
-              <div key={item.name}>
-                <ItemTitle>
-                  <div>{item.name}</div>{' '}
-                  <Button
-                    variant='primary'
-                    onClick={() => {
-                      return setIsModalOpen(true)
-                    }}
-                  >
-                    Missions
-                  </Button>
-                </ItemTitle>
-                <CardContent style={{ padding: '2rem 1rem 1rem 1rem' }}>
-                  <div style={{ flex: 1 }}>
-                    <img
-                      src={item.image}
-                      alt='Ship image'
-                      width={'100%'}
-                      style={{ borderRadius: '5px' }}
-                    />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <CardItem>
-                      <CardItemTitle>Home port</CardItemTitle>
-                      <CardItemValue>{item.home_port}</CardItemValue>
-                    </CardItem>
-                    <CardItem>
-                      <CardItemTitle>Class</CardItemTitle>
-                      <CardItemValue>{item.class}</CardItemValue>
-                    </CardItem>
-                    <CardItem>
-                      <CardItemTitle>Model</CardItemTitle>
-                      <CardItemValue>
-                        {item.model && item.model} {!item.model && '/'}
-                      </CardItemValue>
-                    </CardItem>
-                    <CardItem>
-                      <CardItemTitle>Year built</CardItemTitle>
-                      <CardItemValue>{item.year_built}</CardItemValue>
-                    </CardItem>
-                  </div>
-                </CardContent>
-                <ShipModal
-                  missions={item.missions}
-                  show={isModalOpen}
-                  setIsModalOpen={setIsModalOpen}
-                ></ShipModal>
-              </div>
-            )
-          })}
+
+          {missionDetailsList && missionDetailsList.ships.length === 0 && (
+            <Alert>There is no ship details to display.</Alert>
+          )}
+
+          <div style={{ padding: '0 2rem', marginBottom: '2rem' }}>
+            {missionDetailsList?.ships &&
+              missionDetailsList.ships.map((item) => {
+                return (
+                  <AnimationOnScroll animateIn='animate__fadeIn' duration={2} key={item.name}>
+                    <div>
+                      <ItemTitle>
+                        <div>{item.name}</div>{' '}
+                        <Button
+                          variant='primary'
+                          onClick={() => {
+                            return setIsModalOpen(true)
+                          }}
+                        >
+                          Missions
+                        </Button>
+                      </ItemTitle>
+
+                      <CardContent
+                        style={{
+                          padding: '2rem 1rem 1rem 1rem',
+
+                          border: '3px solid #005288',
+                        }}
+                      >
+                        <div style={{ flex: 1 }}>
+                          {item.image && (
+                            <img
+                              src={item.image}
+                              alt='Ship image'
+                              width={'100%'}
+                              style={{ borderRadius: '5px', maxHeight: '210px' }}
+                            />
+                          )}
+                          {!item.image && <Alert>There is no image of the ship.</Alert>}
+                        </div>
+                        <div
+                          style={{
+                            flex: 1,
+                          }}
+                        >
+                          <CardItem style={{ borderTop: '3px solid #005288' }}>
+                            <CardItemTitle>Home port</CardItemTitle>
+                            <CardItemValue>
+                              {item.home_port && item.home_port} {!item.home_port && '/'}
+                            </CardItemValue>
+                          </CardItem>
+                          <CardItem>
+                            <CardItemTitle>Class</CardItemTitle>
+                            <CardItemValue>
+                              {item.class && item.class} {!item.class && '/'}
+                            </CardItemValue>
+                          </CardItem>
+                          <CardItem>
+                            <CardItemTitle>Model</CardItemTitle>
+                            <CardItemValue>
+                              {item.model && item.model} {!item.model && '/'}
+                            </CardItemValue>
+                          </CardItem>
+                          <CardItem>
+                            <CardItemTitle>Year built</CardItemTitle>
+                            <CardItemValue>
+                              {item.year_built && item.year_built} {!item.year_built && '/'}
+                            </CardItemValue>
+                          </CardItem>
+                        </div>
+                      </CardContent>
+
+                      <ShipModal
+                        missions={item.missions}
+                        missionsCount={item.missions.length}
+                        show={isModalOpen}
+                        setIsModalOpen={setIsModalOpen}
+                      ></ShipModal>
+                    </div>
+                  </AnimationOnScroll>
+                )
+              })}
+          </div>
         </Card>
       </CardBg>
 
@@ -291,48 +339,50 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
               }}
             >
               <div>
-                <CardContent style={{ marginBottom: '2rem', alignContent: 'center' }}>
-                  {!missionDetailsList?.links.reddit_media ? (
-                    ''
-                  ) : (
-                    <a
-                      href={missionDetailsList.links.reddit_media}
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src='/static/images/logo/reddit.svg' width={200} />
-                    </a>
-                  )}
+                <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+                  <CardContent style={{ marginBottom: '2rem', alignContent: 'center' }}>
+                    {!missionDetailsList?.links.reddit_media ? (
+                      ''
+                    ) : (
+                      <a
+                        href={missionDetailsList.links.reddit_media}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src='/static/images/logo/reddit.svg' width={200} />
+                      </a>
+                    )}
 
-                  {!missionDetailsList?.links.article_link ? (
-                    ''
-                  ) : (
-                    <a
-                      href={missionDetailsList.links.article_link}
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src='/static/images/logo/news.svg' width={70} />
-                    </a>
-                  )}
-                </CardContent>
-                <CardContent style={{ alignItems: 'center' }}>
-                  {!missionDetailsList?.links.presskit ? (
-                    ''
-                  ) : (
-                    <a href={missionDetailsList.links.presskit} target='_blank' rel='noreferrer'>
-                      <img src='/static/images/logo/spacex.svg' width={200} />
-                    </a>
-                  )}
+                    {!missionDetailsList?.links.article_link ? (
+                      ''
+                    ) : (
+                      <a
+                        href={missionDetailsList.links.article_link}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src='/static/images/logo/news.svg' width={70} />
+                      </a>
+                    )}
+                  </CardContent>
+                  <CardContent style={{ alignItems: 'center' }}>
+                    {!missionDetailsList?.links.presskit ? (
+                      ''
+                    ) : (
+                      <a href={missionDetailsList.links.presskit} target='_blank' rel='noreferrer'>
+                        <img src='/static/images/logo/spacex.svg' width={200} />
+                      </a>
+                    )}
 
-                  {!missionDetailsList?.links.wikipedia ? (
-                    ''
-                  ) : (
-                    <a href={missionDetailsList.links.wikipedia} target='_blank' rel='noreferrer'>
-                      <img src='/static/images/logo/wiki.svg' width={100} />
-                    </a>
-                  )}
-                </CardContent>
+                    {!missionDetailsList?.links.wikipedia ? (
+                      ''
+                    ) : (
+                      <a href={missionDetailsList.links.wikipedia} target='_blank' rel='noreferrer'>
+                        <img src='/static/images/logo/wiki.svg' width={100} />
+                      </a>
+                    )}
+                  </CardContent>
+                </AnimationOnScroll>
               </div>
             </div>
           </CardContent>

@@ -95,3 +95,12 @@
     --bs-btn-hover-bg: #005f9e;
     --bs-btn-hover-border-color: #005f9e;
 }
+
+.btn-primary {
+  --bs-btn-color: #005f9e;
+  --bs-btn-bg: #DFDDDA;
+  --bs-btn-border-color: ;
+  --bs-btn-hover-color: #005f9e;
+  --bs-btn-hover-bg: #DFDDDA;
+  --bs-btn-hover-border-color: #DFDDDA;
+}

@@ -27,11 +27,9 @@ export const useGetAllMissions = () => {
 
   const getData = async () => {
     const missionsArray: any = []
-    console.log('TESTETST')
+
     const data = await graphQLClient.request(GET_ALL_LAUNCHES)
-    // console.log(JSON.stringify(data.launches, undefined, 2))
     const { launches } = data
-    // console.log(launches)
     launches.map((item: MissionData) => {
       missionsArray.push({
         id: item.id,
@@ -41,7 +39,6 @@ export const useGetAllMissions = () => {
         launchStatus: launchStatus[item.launch_success ? 0 : 1],
       })
     })
-    // console.log(arr)
     setMissionsList(missionsArray)
   }
   useEffect(() => {

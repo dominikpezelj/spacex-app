@@ -19,7 +19,6 @@ export const useGetMissionById = (missionId: string) => {
     const { mission_name: missionName } = launch
     dispatch(headerActions.headerPatch(missionPatch))
     dispatch(headerActions.headerMissionName(missionName))
-    console.log(launch)
   }
   useEffect(() => {
     getData()

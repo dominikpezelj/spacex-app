@@ -7,7 +7,6 @@ import { LoadingSpinner } from '../components/LoadingSpinner'
 import { columns } from '../common/constants'
 import paginationFactory from 'react-bootstrap-table2-paginator'
 import styled from 'styled-components'
-import { useEffect } from 'react'
 import { useGetAllMissions } from '../hooks/useGetAllMissions'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,18 +22,12 @@ export const MissionsTable = () => {
 
   const rowEvents = {
     onClick: (e: any, row: any, rowIndex: any) => {
-      console.log(e)
-      console.log(row.id)
       navigate('/missions/' + row.id)
     },
     /* onMouseEnter: (e: any, row: any, rowIndex: any) => {
       console.log(row.missionName)
     }, */
   }
-
-  useEffect(() => {
-    console.log(missionsList)
-  }, [missionsList])
 
   return (
     <Container>

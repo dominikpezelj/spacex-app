@@ -29,7 +29,6 @@ export const Header = () => {
     return state.header.headerPatch
   })
 
-  console.log(missionPatch)
   return (
     <HeaderStyled>
       <HeaderContent>
