@@ -1,27 +1,10 @@
 import '../common/modal.css'
 
 import Button from 'react-bootstrap/Button'
+import { FlightValue } from './styled/components.styled'
 import { ListGroup } from 'react-bootstrap'
-import { Mission } from '../hooks/interface'
 import Modal from 'react-bootstrap/Modal'
-import styled from 'styled-components'
-
-interface ShipModalProps {
-  missions: Mission[]
-  missionsCount: number
-  show: boolean
-  setIsModalOpen(state: boolean): void
-}
-
-const FlightValue = styled.div`
-  background: #005288;
-  padding: 0.2rem 1rem 0.2rem 1rem;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  border-radius: 10px;
-  color: white;
-`
+import { ShipModalProps } from '../hooks/interface/props'
 
 export const ShipModal = ({ missions, missionsCount, show, setIsModalOpen }: ShipModalProps) => {
   const handleClose = () => {

@@ -1,111 +1,30 @@
 import 'animate.css/animate.min.css'
-import '../common/animate.min.css'
 import '../common/index.css'
 
+import {
+  Alert,
+  Card,
+  CardBg,
+  CardBody,
+  CardContent,
+  CardHeader,
+  CardItem,
+  CardItemTitle,
+  CardItemValue,
+  CardText,
+  ItemTitle,
+} from './styled/components.styled'
 import { useEffect, useState } from 'react'
 
 import { AnimationOnScroll } from 'react-animation-on-scroll'
 import { Button } from 'react-bootstrap'
 import { ImageCarousel } from './Carousel'
 import { LoadingSpinner } from './LoadingSpinner'
+import { MissionsDetailsProps } from '../hooks/interface/props'
 import ReactPlayer from 'react-player'
 import { ShipModal } from './Modal'
-import styled from 'styled-components'
 import { useGetMissionById } from '../hooks/useGetMissionById'
 import { usePrepareData } from '../hooks/usePrepareData'
-
-const CardBg = styled.div`
-  background: #005288;
-  padding: 2rem;
-  border-radius: 20px;
-  justifyContent: 'space-between',
-  display: 'flex',
-  flexDirection: 'row',
-`
-
-const Card = styled.div`
-  background: #dfddda;
-  padding: 2rem;
-  flex: 1;
-  border-radius: 20px;
-`
-
-const CardContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
-`
-
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  border-bottom: 3px solid #005288;
-`
-const CardBody = styled.div`
-  padding: 1rem;
-`
-
-const CardText = styled.div`
-  text-align: justify;
-  text-justify: inter-word;
-`
-const CardItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-  border-bottom: 3px solid #005288;
-  align-items: center;
-  @media (max-width: 600px) {
-    display: block;
-  }
-`
-const CardItemTitle = styled.div`
-  font-weight: 600;
-`
-const CardItemValue = styled.div`
-  background: #005288;
-  padding: 0.2rem 1rem 0.2rem 1rem;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  border-radius: 10px;
-  color: white;
-`
-const Alert = styled.div`
-  flex: 1;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid #005288;
-  border-radius: 1rem;
-  color: white;
-  padding: 0.5rem 0 0.5rem 0;
-`
-
-const ItemTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background: #005288;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: white;
-  margin-top: 2rem;
-`
-type MissionsDetailsProps = {
-  missionId: string
-}
 
 export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
   const { missionDetailsList } = useGetMissionById(missionId)
@@ -254,7 +173,6 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
                       <CardContent
                         style={{
                           padding: '2rem 1rem 1rem 1rem',
-
                           border: '3px solid #005288',
                         }}
                       >
@@ -338,52 +256,50 @@ export const MissionsDetails = ({ missionId }: MissionsDetailsProps) => {
                 alignItems: 'center',
               }}
             >
-              <div>
-                <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
-                  <CardContent style={{ marginBottom: '2rem', alignContent: 'center' }}>
-                    {!missionDetailsList?.links.reddit_media ? (
-                      ''
-                    ) : (
-                      <a
-                        href={missionDetailsList.links.reddit_media}
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        <img src='/static/images/logo/reddit.svg' width={200} />
-                      </a>
-                    )}
+              <AnimationOnScroll animateIn='animate__fadeIn' duration={2}>
+                <CardContent style={{ marginBottom: '2rem', alignContent: 'center' }}>
+                  {!missionDetailsList?.links.reddit_media ? (
+                    ''
+                  ) : (
+                    <a
+                      href={missionDetailsList.links.reddit_media}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <img src='/static/images/logo/reddit.svg' width={200} />
+                    </a>
+                  )}
 
-                    {!missionDetailsList?.links.article_link ? (
-                      ''
-                    ) : (
-                      <a
-                        href={missionDetailsList.links.article_link}
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        <img src='/static/images/logo/news.svg' width={70} />
-                      </a>
-                    )}
-                  </CardContent>
-                  <CardContent style={{ alignItems: 'center' }}>
-                    {!missionDetailsList?.links.presskit ? (
-                      ''
-                    ) : (
-                      <a href={missionDetailsList.links.presskit} target='_blank' rel='noreferrer'>
-                        <img src='/static/images/logo/spacex.svg' width={200} />
-                      </a>
-                    )}
+                  {!missionDetailsList?.links.article_link ? (
+                    ''
+                  ) : (
+                    <a
+                      href={missionDetailsList.links.article_link}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <img src='/static/images/logo/news.svg' width={70} />
+                    </a>
+                  )}
+                </CardContent>
+                <CardContent style={{ alignItems: 'center' }}>
+                  {!missionDetailsList?.links.presskit ? (
+                    ''
+                  ) : (
+                    <a href={missionDetailsList.links.presskit} target='_blank' rel='noreferrer'>
+                      <img src='/static/images/logo/spacex.svg' width={200} />
+                    </a>
+                  )}
 
-                    {!missionDetailsList?.links.wikipedia ? (
-                      ''
-                    ) : (
-                      <a href={missionDetailsList.links.wikipedia} target='_blank' rel='noreferrer'>
-                        <img src='/static/images/logo/wiki.svg' width={100} />
-                      </a>
-                    )}
-                  </CardContent>
-                </AnimationOnScroll>
-              </div>
+                  {!missionDetailsList?.links.wikipedia ? (
+                    ''
+                  ) : (
+                    <a href={missionDetailsList.links.wikipedia} target='_blank' rel='noreferrer'>
+                      <img src='/static/images/logo/wiki.svg' width={100} />
+                    </a>
+                  )}
+                </CardContent>
+              </AnimationOnScroll>
             </div>
           </CardContent>
         </Card>

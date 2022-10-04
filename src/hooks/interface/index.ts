@@ -79,3 +79,11 @@ export interface Mission {
   flight: string
   name: string
 }
+
+export interface MissionsArray {
+  id: number
+  missionName: string
+  rocketName: string
+  launchDateLocal: string
+  launchStatus: JSX.Element
+}

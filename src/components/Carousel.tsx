@@ -1,10 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
 import Carousel from 'react-bootstrap/Carousel'
-
-interface ImageCarouselProps {
-  images: string[]
-}
+import { ImageCarouselProps } from '../hooks/interface/props'
 
 export const ImageCarousel = ({ images }: ImageCarouselProps) => {
   return (

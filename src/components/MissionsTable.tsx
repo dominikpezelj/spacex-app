@@ -3,17 +3,12 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import '../common/table.css'
 
 import BootstrapTable from 'react-bootstrap-table-next'
+import { Container } from './styled/components.styled'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { columns } from '../common/constants'
 import paginationFactory from 'react-bootstrap-table2-paginator'
-import styled from 'styled-components'
 import { useGetAllMissions } from '../hooks/useGetAllMissions'
 import { useNavigate } from 'react-router-dom'
-
-const Container = styled.div`
-  padding-top: 4rem;
-  padding-bottom: 9rem;
-`
 
 export const MissionsTable = () => {
   const navigate = useNavigate()
@@ -24,9 +19,6 @@ export const MissionsTable = () => {
     onClick: (e: any, row: any, rowIndex: any) => {
       navigate('/missions/' + row.id)
     },
-    /* onMouseEnter: (e: any, row: any, rowIndex: any) => {
-      console.log(row.missionName)
-    }, */
   }
 
   return (

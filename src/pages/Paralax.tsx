@@ -1,28 +1,8 @@
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { ParallaxText, ParallaxTextSm } from '../components/styled/components.styled'
 import { useEffect, useRef, useState } from 'react'
 
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-
-const ParallaxText = styled.div`
-  text-align: center;
-  font-family: roboto, sans-serif;
-  font-weight: 400;
-  color: white;
-  font-size: 5vw;
-  text-shadow: -0.04em 0.04em 0 #000, 0.04em 0.04em 0 #000, 0.04em -0.04em 0 #000,
-    -0.04em -0.04em 0 #000;
-`
-
-const ParallaxTextSm = styled.div`
-  text-align: center;
-  font-family: roboto, sans-serif;
-  font-weight: 400;
-  color: white;
-  font-size: 3vw;
-  text-shadow: -0.04em 0.04em 0 #000, 0.04em 0.04em 0 #000, 0.04em -0.04em 0 #000,
-    -0.04em -0.04em 0 #000;
-`
 
 export const Paralax = () => {
   const endOfPageRef = useRef<IParallax | null>(null)
